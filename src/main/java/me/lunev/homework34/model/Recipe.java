@@ -59,4 +59,14 @@ public class Recipe {
     public void setCookingSteps(List<String> cookingSteps) {
         this.cookingSteps = cookingSteps;
     }
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "name='" + name + '\'' +
+                ", cookingTime=" + cookingTime +
+                ", ingredients=" + ingredients +
+                ", cookingSteps=" + cookingSteps +
+                '}';
+    }
 }
