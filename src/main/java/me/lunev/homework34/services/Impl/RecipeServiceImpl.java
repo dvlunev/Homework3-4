@@ -5,10 +5,7 @@ import me.lunev.homework34.model.Recipe;
 import me.lunev.homework34.services.RecipeService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static me.lunev.homework34.services.Impl.IngredientServiceImpl.ingredients;
 import static me.lunev.homework34.services.Impl.IngredientServiceImpl.idIng;
@@ -51,11 +48,13 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public Recipe getRecipeOfIdIng2(int idIng1, int idIng2) {
-        Ingredient ingredient1 = ingredients.get(idIng1);
-        Ingredient ingredient2 = ingredients.get(idIng2);
+    public Recipe getRecipeOfIdsIng(Integer... idsIng) {
+        List<Ingredient> ingredientList = new ArrayList<>();
+        for (int i = 0; i < idsIng.length; i++) {
+            ingredientList.add(ingredients.get(idsIng[i]));
+        }
         for (Recipe recipe : recipes.values()) {
-            if (recipe.getIngredients().contains(ingredient1) && recipe.getIngredients().contains(ingredient2)) {
+            if (recipe.getIngredients().containsAll(ingredientList)) {
                 return recipe;
             }
         }
@@ -83,5 +82,16 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public Map<Integer, Recipe> getAllRecipes() {
         return new HashMap<>(recipes);
+    }
+
+    @Override
+    public List<Recipe> getRecipeOfPage(int pageNumber) {
+        List<Recipe> recipesList = new ArrayList<>();
+        for (Integer idRecipe : recipes.keySet()) {
+            if (idRecipe > (pageNumber * 10 - 10) && idRecipe <= pageNumber * 10) {
+                recipesList.add(recipes.get(idRecipe));
+            }
+        }
+        return recipesList;
     }
 }

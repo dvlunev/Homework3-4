@@ -43,13 +43,22 @@ public class RecipeController {
         return ResponseEntity.ok(recipesList);
     }
 
-    @GetMapping("/idIng1/{idIng1}/idIng2/{idIng2}")
-    public ResponseEntity<Recipe> getRecipeOfIdIng(@PathVariable int idIng1, @PathVariable int idIng2) {
-        Recipe recipe = recipeService.getRecipeOfIdIng2(idIng1, idIng2);
+    @GetMapping("/idsIng/{idsIng}")
+    public ResponseEntity<Recipe> getRecipeOfIdIng(@PathVariable Integer... idsIng) {
+        Recipe recipe = recipeService.getRecipeOfIdsIng(idsIng);
         if (recipe == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(recipe);
+    }
+
+    @GetMapping("/pageNumber/{pageNumber}")
+    public ResponseEntity<List<Recipe>> getRecipeOfPage(@PathVariable int pageNumber) {
+        List<Recipe> recipesList = new ArrayList<>(recipeService.getRecipeOfPage(pageNumber));
+        if (recipesList.size() == 0) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(recipesList);
     }
 
     @GetMapping

@@ -11,7 +11,7 @@ import java.util.Map;
 @RequestMapping("/ingredient")
 public class IngredientController {
 
-    public final IngredientService ingredientService;
+    private final IngredientService ingredientService;
 
     public IngredientController(IngredientService ingredientService) {
         this.ingredientService = ingredientService;

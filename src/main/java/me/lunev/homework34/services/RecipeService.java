@@ -13,11 +13,13 @@ public interface RecipeService {
 
     List<Recipe> getRecipeOfIdIng(int idIng);
 
-    Recipe getRecipeOfIdIng2(int idIng1, int idIng2);
+    Recipe getRecipeOfIdsIng(Integer... idsIng);
 
     Recipe editRecipe(int id, Recipe recipe);
 
     boolean deleteRecipe(int id);
 
     Map<Integer, Recipe> getAllRecipes();
+
+    List<Recipe> getRecipeOfPage(int pageNumber);
 }
