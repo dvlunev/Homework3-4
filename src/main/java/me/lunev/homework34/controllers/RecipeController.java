@@ -44,12 +44,12 @@ public class RecipeController {
     }
 
     @GetMapping("/idsIng/{idsIng}")
-    public ResponseEntity<Recipe> getRecipeOfIdIng(@PathVariable Integer... idsIng) {
-        Recipe recipe = recipeService.getRecipeOfIdsIng(idsIng);
-        if (recipe == null) {
+    public ResponseEntity<List<Recipe>> getRecipeOfIdIng(@PathVariable Integer... idsIng) {
+        List<Recipe> recipesList = new ArrayList<>(recipeService.getRecipeOfIdsIng(idsIng));
+        if (recipesList.size() == 0) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(recipe);
+        return ResponseEntity.ok(recipesList);
     }
 
     @GetMapping("/pageNumber/{pageNumber}")
@@ -62,12 +62,11 @@ public class RecipeController {
     }
 
     @GetMapping
-    public ResponseEntity<Map<Integer, Recipe>> getAllIngredients() {
-        Map<Integer, Recipe> listRecipes = recipeService.getAllRecipes();
-        if (listRecipes == null) {
+    public ResponseEntity<Map<Integer, Recipe>> getAllRecipes() {
+        if (recipeService.getAllRecipes() == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(listRecipes);
+        return ResponseEntity.ok(recipeService.getAllRecipes());
     }
 
     @PutMapping("/{id}")

@@ -48,17 +48,18 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public Recipe getRecipeOfIdsIng(Integer... idsIng) {
+    public List<Recipe> getRecipeOfIdsIng(Integer... idsIng) {
         List<Ingredient> ingredientList = new ArrayList<>();
+        List<Recipe> recipesList = new ArrayList<>();
         for (int i = 0; i < idsIng.length; i++) {
             ingredientList.add(ingredients.get(idsIng[i]));
         }
         for (Recipe recipe : recipes.values()) {
             if (recipe.getIngredients().containsAll(ingredientList)) {
-                return recipe;
+                recipesList.add(recipe);
             }
         }
-        return null;
+        return recipesList;
     }
 
     @Override
@@ -81,7 +82,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public Map<Integer, Recipe> getAllRecipes() {
-        return new HashMap<>(recipes);
+        return recipes;
     }
 
     @Override

@@ -13,7 +13,7 @@ public interface RecipeService {
 
     List<Recipe> getRecipeOfIdIng(int idIng);
 
-    Recipe getRecipeOfIdsIng(Integer... idsIng);
+    List<Recipe> getRecipeOfIdsIng(Integer... idsIng);
 
     Recipe editRecipe(int id, Recipe recipe);
 
