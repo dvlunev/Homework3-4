@@ -16,7 +16,7 @@ public class Ingredient {
 
     public Ingredient(String name, int amount, String unitMeasurement) {
         setName(name);
-        setAmountIngredients(amount);
+        setAmount(amount);
         setUnitMeasurement(unitMeasurement);
     }
 
@@ -31,11 +31,11 @@ public class Ingredient {
         this.name = name;
     }
 
-    public int getAmountIngredients() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmountIngredients(int amount) {
+    public void setAmount(int amount) {
         if (amount <= 0) {
             amount = 1;
         }
@@ -51,5 +51,14 @@ public class Ingredient {
             unitMeasurement = "По вкусу";
         }
         this.unitMeasurement = unitMeasurement;
+    }
+
+    @Override
+    public String toString() {
+        return "Ingredient{" +
+                "name='" + name + '\'' +
+                ", amount=" + amount +
+                ", unitMeasurement='" + unitMeasurement + '\'' +
+                '}';
     }
 }
